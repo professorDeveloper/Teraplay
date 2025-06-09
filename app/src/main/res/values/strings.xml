@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Teraplay</string>
+    <string name="enter_video_url">Enter TerraBox file url</string>
+    <string name="download">Download</string>
+    <string name="search">Try search</string>
+    <string name="supported_platforms">Supported Platforms</string>
+    <string name="paste_from_clipboard">Paste from clipboard</string>
+    <string name="terrabox">TerraBox</string>
+    <string name="telegram_link">Telegram Channel</string>
+    <string name="preview_title">Studies show that watching a beaver eat cabbage lowers stress by 17%.mp4</string>
+</resources>

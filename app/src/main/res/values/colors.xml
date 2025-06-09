@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Colors -->
+    <color name="primary">#4B5D8D</color> <!-- Blue 500 -->
+    <color name="primary_variant">#5469A1</color> <!-- Blue 700 -->
+    <color name="secondary">#A5B2D6</color> <!-- Blue 100 -->
+    <color name="secondary_variant">#A4B5E1</color> <!-- Blue 200 -->
+
+    <!-- Button Colors (Soft Blue) -->
+    <color name="button_background">#4B5D8D</color> <!-- Blue 200 -->
+    <color name="button_text">#000000</color>
+    <color name="button_disabled">#BDBDBD</color>
+    <color name="background_dashboard">#EEEDFF</color>
+
+    <!-- Surface Colors -->
+    <color name="background">#EEEDFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="card_background">#FDFCF5</color>
+
+    <!-- Text Colors -->
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_background">#000000</color>
+    <color name="on_surface">#000000</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="hint_text">#9E9E9E</color>
+
+    <!-- Component Colors -->
+    <color name="toolbar_color">#4B5D8D</color>
+    <color name="toolbar_text">#FFFFFF</color>
+    <color name="chip_background">#E3F2FD</color> <!-- Blue 50 -->
+    <color name="chip_text">#212121</color>
+    <color name="fab_background">#4B5D8D</color>
+    <color name="fab_icon">#FFFFFF</color>
+    <color name="icon_color">#212121</color>
+
+</resources>
