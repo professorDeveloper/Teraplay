@@ -1,38 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="256dp"
-    android:height="256dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
 
-    <!-- Cube top face -->
-    <path
-        android:name="cube_top"
-        android:fillColor="#A5B2D6"
-        android:strokeColor="#A4B5E1"
-        android:strokeWidth="1.5"
-        android:pathData="M25,35 L50,20 L75,35 L50,50 L25,35 Z" />
+    <!-- 1) Base vector graphic -->
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="256dp"
+            android:height="256dp"
+            android:viewportWidth="100"
+            android:viewportHeight="100">
 
-    <!-- Cube left face -->
-    <path
-        android:name="cube_left"
-        android:fillColor="#4B5D8D"
-        android:strokeColor="#5469A1"
-        android:strokeWidth="1.5"
-        android:pathData="M25,35 L25,65 L50,80 L50,50 L25,35 Z" />
+            <!-- Cube group (already pops in) -->
+            <group
+                android:name="cube_group"
+                android:pivotX="50"
+                android:pivotY="50"
+                android:scaleX="0"
+                android:scaleY="0"
+                android:translationY="30dp">
+                <path
+                    android:name="cube_top"
+                    android:fillColor="#A5B2D6"
+                    android:strokeColor="#A4B5E1"
+                    android:strokeWidth="1.5"
+                    android:pathData="M25,35 L50,20 L75,35 L50,50 L25,35 Z"/>
+                <path
+                    android:name="cube_left"
+                    android:fillColor="#4B5D8D"
+                    android:strokeColor="#5469A1"
+                    android:strokeWidth="1.5"
+                    android:pathData="M25,35 L25,65 L50,80 L50,50 L25,35 Z"/>
+                <path
+                    android:name="cube_right"
+                    android:fillColor="#5469A1"
+                    android:strokeColor="#4B5D8D"
+                    android:strokeWidth="1.5"
+                    android:pathData="M50,50 L50,80 L75,65 L75,35 L50,50 Z"/>
+            </group>
 
-    <!-- Cube right face -->
-    <path
-        android:name="cube_right"
-        android:fillColor="#5469A1"
-        android:strokeColor="#4B5D8D"
-        android:strokeWidth="1.5"
-        android:pathData="M50,50 L50,80 L75,65 L75,35 L50,50 Z" />
+            <!-- Play icon group, starts hidden & small -->
+            <group
+                android:name="play_group"
+                android:pivotX="52.5"
+                android:pivotY="50"
+                android:scaleX="0"
+                android:scaleY="0"
+                android:translationY="10dp"
+                android:alpha="1">
+                <path
+                    android:name="play"
+                    android:fillColor="#FFFFFF"
+                    android:pathData="M45,40 L45,60 L60,50 Z"/>
+            </group>
 
-    <!-- Play triangle -->
-    <path
-        android:name="play"
-        android:fillColor="#FFFFFF"
-        android:fillAlpha="0.95"
-        android:pathData="M45,40 L45,60 L60,50 Z" />
-</vector>
+        </vector>
+    </aapt:attr>
+
+    <!-- 2) Cube pops in with overshoot over 1s -->
+    <target android:name="cube_group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:duration="1000"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:duration="1000"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+                <objectAnimator
+                    android:propertyName="translationY"
+                    android:duration="1000"
+                    android:valueFrom="30"
+                    android:valueTo="0"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <!-- 3) Play icon entrance + pulse + swing, all fitting in 2s -->
+    <target android:name="play_group">
+        <aapt:attr name="android:animation">
+            <set>
+
+                <!-- 3.1 Entrance: scale 0→1 & drop 10→0 -->
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:startOffset="800"
+                    android:duration="400"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:startOffset="800"
+                    android:duration="400"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+                <objectAnimator
+                    android:propertyName="translationY"
+                    android:startOffset="800"
+                    android:duration="400"
+                    android:valueFrom="10"
+                    android:valueTo="0"
+                    android:interpolator="@android:interpolator/overshoot"
+                    android:valueType="floatType"/>
+
+                <!-- 3.2 Gentle pulse: 1→1.1 and back -->
+                <objectAnimator
+                    android:propertyName="scaleX"
+                    android:startOffset="1300"
+                    android:duration="300"
+                    android:valueFrom="1"
+                    android:valueTo="1.1"
+                    android:repeatCount="1"
+                    android:repeatMode="reverse"
+                    android:valueType="floatType"/>
+                <objectAnimator
+                    android:propertyName="scaleY"
+                    android:startOffset="1300"
+                    android:duration="300"
+                    android:valueFrom="1"
+                    android:valueTo="1.1"
+                    android:repeatCount="1"
+                    android:repeatMode="reverse"
+                    android:valueType="floatType"/>
+
+                <!-- 3.3 Subtle swing: left→right→center -->
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="1600"
+                    android:duration="400"
+                    android:valueFrom="0"
+                    android:valueTo="6"
+                    android:repeatCount="1"
+                    android:repeatMode="reverse"
+                    android:interpolator="@android:interpolator/accelerate_decelerate"
+                    android:valueType="floatType"/>
+
+            </set>
+        </aapt:attr>
+    </target>
+
+</animated-vector>

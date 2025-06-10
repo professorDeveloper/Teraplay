@@ -2,21 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_graph.xml"
+    android:id="@+id/app_graph"
     app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/homeScreen"
         android:name="com.saikou.teraplay.presentation.home.HomeScreen"
-        android:label="home_screen"
+        android:label="Home"
         tools:layout="@layout/home_screen" />
+
     <fragment
         android:id="@+id/splashScreen"
         android:name="com.saikou.teraplay.presentation.splash.SplashScreen"
-        android:label="splash_screen"
-        tools:layout="@layout/splash_screen" >
+        android:label="Splash"
+        tools:layout="@layout/splash_screen">
         <action
-            android:id="@+id/action_splashScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
+            android:id="@+id/action_splashScreen_to_introScreen"
+            app:destination="@id/introScreen"
+           />
     </fragment>
+
+    <fragment
+        android:id="@+id/introScreen"
+        android:name="com.saikou.teraplay.presentation.intro.IntroScreen"
+        android:label="Introduction"
+        tools:layout="@layout/intro_screen">
+        <action
+            android:id="@+id/action_introScreen_to_homeScreen"
+            app:destination="@id/homeScreen"
+            />
+    </fragment>
+
 </navigation>

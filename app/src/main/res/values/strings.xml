@@ -3,6 +3,7 @@
     <string name="enter_video_url">Enter TerraBox file url</string>
     <string name="download">Download</string>
     <string name="search">Try search</string>
+    <string name="start">Get Started</string>
     <string name="supported_platforms">Supported Platforms</string>
     <string name="paste_from_clipboard">Paste from clipboard</string>
     <string name="terrabox">TerraBox</string>
@@ -10,4 +11,9 @@
     <string name="preview_title">Studies show that watching a beaver eat cabbage lowers stress by 17%.mp4</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro_banner">Intro Banner</string>
+    <string name="teraplay_is_terabox_based_video_player_it_provides_a_simple_interface_for_video_playback_and_playback_control_any_movie_can_download_and_watch">Teraplay is TeraBox based video player. It provides a simple interface for video playback and playback control.Any Movie can download and watch.</string>
+    <string name="invalid_url_error" >
+        Invalid URL
+    </string>
 </resources>

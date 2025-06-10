@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/introScreen"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/introBanner"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_32sdp"
+
+        android:padding="@dimen/_4sdp"
+        android:src="@drawable/welcome_svg"
+        android:transitionName="logoTransition"
+        android:contentDescription="@string/intro_banner"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/titleText"/>
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Teraplay"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/introBanner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_16sdp" />
+
+    <TextView
+        android:id="@+id/descText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:lines="3"
+        android:ellipsize="end"
+        android:fontFamily="@font/ubuntu_medium"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:text="@string/teraplay_is_terabox_based_video_player_it_provides_a_simple_interface_for_video_playback_and_playback_control_any_movie_can_download_and_watch"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_8sdp" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="@dimen/_2sdp"
+        app:layout_constraintTop_toBottomOf="@id/descText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_18sdp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrivacy"
+            android:fontFamily="@font/poppins_bold"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContact"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_height="wrap_content"
+            android:text="Contact Us" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShare"
+            android:fontFamily="@font/poppins_bold"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/getStartButton"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_46sdp"
+        android:fontFamily="@font/poppins_bold"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:textSize="@dimen/_13ssp"
+        android:insetBottom="0dp"
+        android:text="@string/start"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonContainer" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

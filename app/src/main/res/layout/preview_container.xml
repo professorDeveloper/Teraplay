@@ -4,6 +4,7 @@
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/card_background"
     android:layout_margin="@dimen/_4sdp"
     app:cardCornerRadius="@dimen/_8sdp"
     app:cardElevation="@dimen/_1sdp">
@@ -39,6 +40,7 @@
                 android:src="@drawable/ic_play_circle_filled" />
 
             <TextView
+                android:id="@+id/sizeBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
@@ -58,6 +60,7 @@
             android:id="@+id/video_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/button_text"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:fontFamily="@font/inter_bold"

@@ -3,6 +3,8 @@ package com.saikou.teraplay.app
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.saikou.teraplay.di.appModule
+import com.saikou.teraplay.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -23,7 +25,7 @@ class MyApp : Application() {
         startKoin {
             androidContext(this@MyApp)
             androidLogger()
-//            modules(NetworkModule, koinModule, firebaseModule)
+            modules(networkModule, appModule)
 
         }
 

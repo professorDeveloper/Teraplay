@@ -11,6 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:transitionName="logoTransition"
         app:srcCompat="@drawable/app_logo" />
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="@string/app_name"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/button_text"
+        android:layout_marginBottom="100dp"/>
+
 
 </FrameLayout>
