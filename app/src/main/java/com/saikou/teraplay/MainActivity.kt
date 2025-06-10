@@ -2,6 +2,7 @@ package com.saikou.teraplay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.saikou.teraplay.utils.initActivity
 
 class MainActivity : AppCompatActivity() {

@@ -31,24 +31,26 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.saikou.teraplay.R
+import com.saikou.teraplay.app.MyApp
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+
 //
-//fun View.alphaAnim() {
-//    val anim = AnimationUtils.loadAnimation(
-//        MyApp.instance!!,
-//        R.anim.alpha_anim
-//    ).apply {
-//        duration = 1800L
-//
-//        fillAfter = true
-//    }
-//
-//    startAnimation(anim)
-//
-//}
+fun View.alphaAnim() {
+    val anim = AnimationUtils.loadAnimation(
+        MyApp.context,
+        R.anim.alpha_anim
+    ).apply {
+        duration = 1800L
+
+        fillAfter = true
+    }
+
+    startAnimation(anim)
+
+}
 
 fun View.visible() {
     this.visibility = View.VISIBLE
@@ -141,6 +143,7 @@ fun animationTransaction(): NavOptions.Builder {
         .setPopEnterAnim(R.anim.from_left).setPopExitAnim(R.anim.to_right)
     return navBuilder
 }
+
 fun <T> tryWith(post: Boolean = false, snackbar: Boolean = true, call: () -> T): T? {
     return try {
         call.invoke()
@@ -165,6 +168,7 @@ fun BottomNavigationView.showWithAnimation(fragmentContainerView: View) {
     this.animateTranslationY(0f, 66f, 700)
     fragmentContainerView.animateMarginBottom(0f, 700)
 }
+
 fun BottomNavigationView.hideWithoutAnimation(fragmentContainerView: View) {
     if (this.visibility == View.GONE) return
     this.gone()

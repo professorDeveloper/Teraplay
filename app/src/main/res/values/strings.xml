@@ -8,4 +8,6 @@
     <string name="terrabox">TerraBox</string>
     <string name="telegram_link">Telegram Channel</string>
     <string name="preview_title">Studies show that watching a beaver eat cabbage lowers stress by 17%.mp4</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

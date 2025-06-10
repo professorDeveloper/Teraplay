@@ -3,11 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_graph.xml"
-    app:startDestination="@id/homeScreen">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/homeScreen"
         android:name="com.saikou.teraplay.presentation.home.HomeScreen"
         android:label="home_screen"
         tools:layout="@layout/home_screen" />
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.saikou.teraplay.presentation.splash.SplashScreen"
+        android:label="splash_screen"
+        tools:layout="@layout/splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
+    </fragment>
 </navigation>

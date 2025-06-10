@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="256dp"
+    android:height="256dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Cube top face -->
+    <path
+        android:name="cube_top"
+        android:fillColor="#A5B2D6"
+        android:strokeColor="#A4B5E1"
+        android:strokeWidth="1.5"
+        android:pathData="M25,35 L50,20 L75,35 L50,50 L25,35 Z" />
+
+    <!-- Cube left face -->
+    <path
+        android:name="cube_left"
+        android:fillColor="#4B5D8D"
+        android:strokeColor="#5469A1"
+        android:strokeWidth="1.5"
+        android:pathData="M25,35 L25,65 L50,80 L50,50 L25,35 Z" />
+
+    <!-- Cube right face -->
+    <path
+        android:name="cube_right"
+        android:fillColor="#5469A1"
+        android:strokeColor="#4B5D8D"
+        android:strokeWidth="1.5"
+        android:pathData="M50,50 L50,80 L75,65 L75,35 L50,50 Z" />
+
+    <!-- Play triangle -->
+    <path
+        android:name="play"
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.95"
+        android:pathData="M45,40 L45,60 L60,50 Z" />
+</vector>
