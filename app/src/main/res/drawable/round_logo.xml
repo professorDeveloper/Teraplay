@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="512dp"
+            android:height="512dp"
+            android:viewportWidth="512"
+            android:viewportHeight="512">
+
+            <!-- Background Circle -->
+            <path
+                android:name="circle"
+                android:fillColor="@color/primary"
+                android:pathData="M256,0C114.6,0 0,114.6 0,256s114.6,256 256,256 256,-114.6 256,-256S397.4,0 256,0z" />
+
+            <!-- Play Icon -->
+            <path
+                android:name="play"
+                android:fillColor="#FFFFFFFF"
+                android:pathData="M192,144v224l192,-112z" />
+
+            <!-- Bottom Bar (represents 'Teraplay') -->
+            <path
+                android:name="bar"
+                android:fillColor="#FFFFFFFF"
+                android:pathData="M128,400h256v32h-256z" />
+        </vector>
+    </aapt:attr>
+
+</animated-vector>
