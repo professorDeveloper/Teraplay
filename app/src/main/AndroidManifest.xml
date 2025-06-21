@@ -50,19 +50,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <service
-            android:name=".service.ForegroundDownloadService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync" />
+            android:name=".download.DownloadService"
+            android:exported="false" />
         <receiver
             android:name=".broadcast.DownloadReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="ACTION_CANCEL_DOWNLOAD" />
+                <action android:name="ACTION_PAUSE_DOWNLOAD" />
+                <action android:name="ACTION_RESUME_DOWNLOAD" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

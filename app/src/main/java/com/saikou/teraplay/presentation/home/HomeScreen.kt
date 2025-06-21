@@ -3,6 +3,7 @@ package com.saikou.teraplay.presentation.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.ClipboardManager
 import android.content.Context
@@ -11,6 +12,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,13 +45,14 @@ class HomeScreen : Fragment(R.layout.home_screen) {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModel()
     private var dialogInstance: AlertDialog? = null
+    private var dialogBinding: DialogBackgroundBinding? = null
     private var currentDownloadItem: DownloadItem? = null
     private lateinit var cancelReceiver: BroadcastReceiver
     private val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.POST_NOTIFICATIONS,
+            Manifest.permission.POST_NOTIFICATIONS
         )
     } else {
         arrayOf(
@@ -99,16 +102,7 @@ class HomeScreen : Fragment(R.layout.home_screen) {
 
     @SuppressLint("NewApi")
     private fun requestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissionsLauncher.launch(permissions)
-        } else {
-            permissionsLauncher.launch(
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            )
-        }
+        permissionsLauncher.launch(permissions)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -133,8 +127,7 @@ class HomeScreen : Fragment(R.layout.home_screen) {
             val ime = insets.isVisible(WindowInsetsCompat.Type.ime())
             binding.copyButton.apply {
                 visibility = if (ime) View.VISIBLE else View.GONE
-                translationY =
-                    if (ime) -insets.getInsets(WindowInsetsCompat.Type.ime()).bottom.toFloat() else 0f
+                translationY = if (ime) -insets.getInsets(WindowInsetsCompat.Type.ime()).bottom.toFloat() else 0f
             }
             insets
         }
@@ -166,7 +159,6 @@ class HomeScreen : Fragment(R.layout.home_screen) {
                     binding.dataProgress.visibility = View.VISIBLE
                     binding.previewContainer.root.visibility = View.GONE
                 }
-
                 is UiState.Success -> showPreview(state.data)
                 is UiState.Error -> showError(state.message ?: "Unknown error")
                 else -> {}
@@ -176,12 +168,77 @@ class HomeScreen : Fragment(R.layout.home_screen) {
         viewModel.downloads.observe(viewLifecycleOwner) { list ->
             val item = list.firstOrNull { it.status == DownloadStatus.DOWNLOADING }
             if (item != null && item != currentDownloadItem) {
-                showProgressDialog(item)
                 currentDownloadItem = item
-            } else if (item == null) {
+                showOrUpdateProgressDialog(item)
+            } else if (item == null && currentDownloadItem != null) {
                 dismissDialog()
             }
         }
+
+        viewModel.downloadProgress.observe(viewLifecycleOwner) { (id, prog, stat) ->
+            if (id == currentDownloadItem?.downloadId && dialogBinding != null) {
+                dialogBinding?.apply {
+                    progressBar.progress = prog
+                    tvProgress.text = "$prog%"
+                    tvStatus.text = stat.name
+                    if (stat != DownloadStatus.DOWNLOADING) {
+                        dismissDialog()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showOrUpdateProgressDialog(item: DownloadItem) {
+        if (dialogInstance?.isShowing == true && dialogBinding != null) {
+            // Update existing dialog
+            dialogBinding?.apply {
+                tvFileName.text = item.response.fileName
+                tvStatus.text = item.status.name
+                progressBar.progress = item.progress
+                tvProgress.text = "${item.progress}%"
+            }
+        } else {
+            // Create new dialog
+            dialogBinding = DialogBackgroundBinding.inflate(LayoutInflater.from(requireContext()))
+            dialogBinding?.apply {
+                tvFileName.text = item.response.fileName
+                tvStatus.text = item.status.name
+                progressBar.progress = item.progress
+                tvProgress.text = "${item.progress}%"
+                btnCancel.setOnClickListener {
+                    lifecycleScope.launch {
+                        item.downloadId?.let {
+                            viewModel.cancelDownload(requireContext(), it)
+                            cancelNotification(it.toInt())
+                        }
+                        dismissDialog()
+                    }
+                }
+                btnHide.setOnClickListener {
+                    Log.d("HomeScreen", "Hide button clicked")
+                    dismissDialog()
+                }
+            }
+            dialogInstance = AlertDialog.Builder(requireContext())
+                .setView(dialogBinding?.root)
+                .setCancelable(false)
+                .create()
+                .apply { show() }
+        }
+    }
+
+    private fun cancelNotification(notificationId: Int) {
+        val manager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.cancel(notificationId)
+    }
+
+    private fun dismissDialog() {
+        Log.d("HomeScreen", "Dismissing dialog")
+        dialogInstance?.dismiss()
+        dialogInstance = null
+        dialogBinding = null
+        currentDownloadItem = null
     }
 
     private fun showPreview(data: DownloadResponse) {
@@ -218,39 +275,6 @@ class HomeScreen : Fragment(R.layout.home_screen) {
             .setMessage("$name is downloading...")
             .setPositiveButton("OK", null)
             .show()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun showProgressDialog(item: DownloadItem) {
-        val b = DialogBackgroundBinding.inflate(LayoutInflater.from(requireContext()))
-        b.tvFileName.text = item.response.fileName
-        b.tvStatus.text = item.status.name
-        b.progressBar.progress = item.progress
-        b.tvProgress.text = "${item.progress}%"
-        b.btnCancel.setOnClickListener {
-            lifecycleScope.launch {
-                item.downloadId?.let { viewModel.cancelDownload(requireContext(), it) }
-                dismissDialog()
-            }
-        }
-        b.btnHide.setOnClickListener { dismissDialog() }
-        dialogInstance = AlertDialog.Builder(requireContext())
-            .setView(b.root)
-            .create().apply { show() }
-        viewModel.downloadProgress.observe(viewLifecycleOwner) { (id, prog, stat) ->
-            if (id == item.downloadId) {
-                b.progressBar.progress = prog
-                b.tvProgress.text = "$prog%"
-                b.tvStatus.text = stat.name
-                if (stat != DownloadStatus.DOWNLOADING) dismissDialog()
-            }
-        }
-    }
-
-    private fun dismissDialog() {
-        dialogInstance?.dismiss()
-        dialogInstance = null
-        currentDownloadItem = null
     }
 
     private fun openPlayer(data: DownloadResponse) {
