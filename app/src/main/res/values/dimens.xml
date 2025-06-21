@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- values/dimens.xml -->
+    <dimen name="custom_error_text_size">12sp</dimen>
+    <dimen name="custom_error_padding">4dp</dimen>
+</resources>

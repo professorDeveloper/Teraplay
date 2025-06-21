@@ -22,29 +22,6 @@ class IntroScreen : Fragment() {
     private var _binding: IntroScreenBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // 1) Shared‐element container transform for your logo+title:
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.navHost           // your NavHost container
-            duration = 600L                                  // fast but snappy
-            scrimColor = Color.TRANSPARENT                   // no grey overlay
-            fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
-            addTarget(R.id.introBanner)                        // the ImageView in intro
-            setAllContainerColors(requireContext().getColor(R.color.background_dashboard))
-            setPathMotion(MaterialArcMotion())                 // gentle arc
-        }
-
-        // 2) Fade‐through for non‐shared content:
-        enterTransition = MaterialFadeThrough().apply {
-            duration = 1000L
-            interpolator = AccelerateDecelerateInterpolator()
-        }
-
-        // Disable default return/pop transitions
-        returnTransition = null
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,8 +34,6 @@ class IntroScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Ensure the shared‐element only starts once the destination is laid out:
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
@@ -83,7 +58,6 @@ class IntroScreen : Fragment() {
                 .start()
         }
 
-        // 4) Button nav:
         binding.getStartButton.setOnClickListener {
             findNavController().navigate(
                 R.id.action_introScreen_to_homeScreen,

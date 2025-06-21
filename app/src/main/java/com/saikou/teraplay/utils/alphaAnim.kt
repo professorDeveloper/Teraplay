@@ -90,6 +90,47 @@ fun initActivity(a: Activity) {
 }
 
 
+fun Activity.hideSystemBars() {
+    window.decorView.systemUiVisibility = (
+            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            )
+}
+
+fun <T> readData(fileName: String, context: Context? = null, toast: Boolean = true): T? {
+    val a = context ?: MyApp.context
+    try {
+        if (a?.fileList() != null)
+            if (fileName in a.fileList()) {
+                val fileIS: FileInputStream = a.openFileInput(fileName)
+                val objIS = ObjectInputStream(fileIS)
+                val data = objIS.readObject() as T
+                objIS.close()
+                fileIS.close()
+                return data
+            }
+    } catch (e: Exception) {
+        if (toast) snackString("Error loading data $fileName")
+        e.printStackTrace()
+    }
+    return null
+}
+
+fun saveData(fileName: String, data: Any?, context: Context? = null) {
+    tryWith {
+        val a = context ?: MyApp.context
+        if (a != null) {
+            val fos: FileOutputStream = a.openFileOutput(fileName, Context.MODE_PRIVATE)
+            val os = ObjectOutputStream(fos)
+            os.writeObject(data)
+            os.close()
+            fos.close()
+        }
+    }
+}
 fun snackString(s: String?, activity: Activity? = null, clipboard: String? = null) {
     if (s != null) {
         (activity)?.apply {

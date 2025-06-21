@@ -9,7 +9,11 @@
         android:id="@+id/homeScreen"
         android:name="com.saikou.teraplay.presentation.home.HomeScreen"
         android:label="Home"
-        tools:layout="@layout/home_screen" />
+        tools:layout="@layout/home_screen">
+        <action
+            android:id="@+id/action_homeScreen_to_playerScreen"
+            app:destination="@id/playerScreen" />
+    </fragment>
 
     <fragment
         android:id="@+id/splashScreen"
@@ -18,8 +22,7 @@
         tools:layout="@layout/splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_introScreen"
-            app:destination="@id/introScreen"
-           />
+            app:destination="@id/introScreen" />
     </fragment>
 
     <fragment
@@ -29,8 +32,14 @@
         tools:layout="@layout/intro_screen">
         <action
             android:id="@+id/action_introScreen_to_homeScreen"
-            app:destination="@id/homeScreen"
-            />
+            app:destination="@id/homeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerScreen"
+        android:name="com.saikou.teraplay.presentation.play.PlayerScreen"
+        android:label="PlayerScreen">
+        <argument android:name="args"
+            app:argType="com.saikou.teraplay.data.models.DownloadResponse"/>
     </fragment>
 
 </navigation>

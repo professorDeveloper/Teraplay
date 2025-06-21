@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -20,7 +21,34 @@
             android:background="@color/background_dashboard"
             android:paddingBottom="@dimen/_4sdp"
             app:title="@string/app_name"
-            app:titleTextColor="?attr/colorPrimary" />
+            app:titleTextColor="?attr/colorPrimary">
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="end">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/_20sdp"
+                    app:tint="@color/primary"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:id="@+id/downloadIcon"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    app:srcCompat="@drawable/ic_download" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:id="@+id/historyIcon"
+                    android:layout_width="@dimen/_20sdp"
+                    app:tint="@color/primary"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_history" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -43,7 +71,8 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_14sdp">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <com.saikou.teraplay.custom.CustomTextInputLayout
+                    android:id="@+id/urlInputLayout"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +90,7 @@
                         android:inputType="textUri"
                         android:textColor="@color/button_text"
                         android:textColorHint="?attr/colorOnSurfaceVariant" />
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.saikou.teraplay.custom.CustomTextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/trySearchButton"
@@ -106,10 +135,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/_18sdp"
-        android:layout_marginBottom="@dimen/_54sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:backgroundTint="@color/primary"
         android:contentDescription="@string/paste_from_clipboard"
+
         app:elevation="@dimen/_1sdp"
+        app:layout_anchorGravity="bottom"
         app:srcCompat="@drawable/content_paste_24"
         app:tint="@color/on_primary" />
 

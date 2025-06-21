@@ -1,8 +1,11 @@
 // data/models/DownloadResponse.kt
 package com.saikou.teraplay.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DownloadResponse(
     @SerializedName("file_name")
     val fileName: String,
@@ -18,4 +21,4 @@ data class DownloadResponse(
 
     @SerializedName("sizebytes")
     val sizeBytes: Long
-)
+):Parcelable

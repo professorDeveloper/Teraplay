@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Teraplay</string>
+    <string name="seek_seconds_forward">+%d seconds</string>
+    <string name="seek_seconds_backward">-%d seconds</string>
     <string name="enter_video_url">Enter TerraBox file url</string>
     <string name="download">Download</string>
     <string name="search">Try search</string>
@@ -13,7 +15,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="intro_banner">Intro Banner</string>
     <string name="teraplay_is_terabox_based_video_player_it_provides_a_simple_interface_for_video_playback_and_playback_control_any_movie_can_download_and_watch">Teraplay is TeraBox based video player. It provides a simple interface for video playback and playback control.Any Movie can download and watch.</string>
-    <string name="invalid_url_error" >
+    <string name="invalid_url_error">
         Invalid URL
     </string>
+    <string name="warning_update">Choose Player</string>
+    <string name="download_icon_desc">Download</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -16,6 +16,7 @@
         android:padding="12dp">
 
         <FrameLayout
+            android:id="@+id/playContainer"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp">
 
@@ -51,7 +52,7 @@
                 android:paddingHorizontal="@dimen/_3sdp"
                 android:paddingVertical="@dimen/_3sdp"
                 android:text="19.48 MB"
-                android:textColor="@color/background"
+                android:textColor="@color/toolbar_text"
                 android:textSize="@dimen/_7ssp" />
 
         </FrameLayout>
